@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    >
+
+    <TextView
+        android:id="@+id/transaction_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/viewholder_single_line_height"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="@dimen/viewholder_margin_lateral"
+        android:layout_marginRight="@dimen/viewholder_margin_lateral"
+        android:layout_marginStart="@dimen/viewholder_margin_lateral"
+        android:layout_marginEnd="@dimen/viewholder_margin_lateral"
+        android:textSize="@dimen/viewholder_single_line_text_size"
+        tools:text="SKU number"
+        />
+
+</LinearLayout>

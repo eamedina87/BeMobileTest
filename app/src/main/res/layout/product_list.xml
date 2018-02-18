@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_list"
+    android:name="com.medinamobile.bemobiletest.ProductListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/recyclerview_padding_top"
+    android:paddingBottom="@dimen/recyclerview_padding_top"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="com.medinamobile.bemobiletest.transaction.list.ui.TransactionListActivity"
+    tools:listitem="@layout/product_list_content" />
