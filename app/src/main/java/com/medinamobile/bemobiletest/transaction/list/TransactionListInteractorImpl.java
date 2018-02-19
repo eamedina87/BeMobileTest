@@ -18,7 +18,7 @@ public class TransactionListInteractorImpl implements TransactionListInteractor 
 
     public TransactionListInteractorImpl(AppCompatActivity context) {
         mDatabaseRepository = new TransactionListDatabaseRepositoryImpl(context);
-        mCloudRepository = new TransactionListCloudRepositoryImpl();
+        mCloudRepository = new TransactionListCloudRepositoryImpl(context);
     }
 
     @Override
@@ -49,5 +49,10 @@ public class TransactionListInteractorImpl implements TransactionListInteractor 
     @Override
     public void saveRates(ArrayList<Rate> rates) {
         mDatabaseRepository.saveRates(rates);
+    }
+
+    @Override
+    public void deleteDataFromDatabase() {
+        mDatabaseRepository.deleteAll();
     }
 }

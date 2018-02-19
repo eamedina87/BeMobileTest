@@ -5,6 +5,10 @@ package com.medinamobile.bemobiletest.utils;
  */
 
 public interface CloudUtils {
+    String MODE_TRANSACTIONS = "transactions";
+    String MODE_RATES = "rates";
+    String MODE = "mode";
+
     void getRates();
     void getTransactions();
 }

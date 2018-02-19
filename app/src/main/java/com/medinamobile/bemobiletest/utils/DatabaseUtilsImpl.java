@@ -28,9 +28,9 @@ public class DatabaseUtilsImpl implements DatabaseUtils, LoaderManager.LoaderCal
 
     // TODO: 2/17/2018 DESTROY LOADERS
 
-    public static final int ID_TRANSACTIONS_LOADER = 0;
-    public static final int ID_RATES_LOADER = 1;
-    public static final int ID_TRANSACTIONS_SKU_LOADER = 2;
+    private static final int ID_TRANSACTIONS_LOADER = 0;
+    private static final int ID_RATES_LOADER = 1;
+    private static final int ID_TRANSACTIONS_SKU_LOADER = 2;
     private final AppCompatActivity mContext;
 
 
@@ -68,6 +68,17 @@ public class DatabaseUtilsImpl implements DatabaseUtils, LoaderManager.LoaderCal
         Uri mUri = TestContract.RatesEntry.CONTENT_URI;
         int insertedRows = mContext.getContentResolver().bulkInsert(mUri, BeMobileUtils.getRateListContentValues(rates));
 
+    }
+
+    @Override
+    public void deleteAll() {
+        Uri mUri = TestContract.TransactionEntry.CONTENT_URI;
+        int deleted = mContext.getContentResolver().delete(mUri, null, null);
+        if (deleted>=0){
+            TransactionListEvent event = new TransactionListEvent();
+            event.setEventType(TransactionListEvent.EVENT_TYPE_DELETE_SUCCESS);
+            postEvent(event);
+        }
     }
 
     @Override

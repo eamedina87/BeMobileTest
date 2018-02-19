@@ -1,13 +1,11 @@
 package com.medinamobile.bemobiletest.transaction.list;
 
-import com.medinamobile.bemobiletest.entities.Rate;
-import com.medinamobile.bemobiletest.entities.Transaction;
-import com.medinamobile.bemobiletest.transaction.list.events.TransactionListEvent;
-import com.medinamobile.bemobiletest.utils.CloudUtilsImpl;
-import com.medinamobile.bemobiletest.utils.EventBus;
-import com.medinamobile.bemobiletest.utils.EventBusImpl;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
-import java.util.ArrayList;
+import com.medinamobile.bemobiletest.utils.CloudUtils;
+import com.medinamobile.bemobiletest.utils.CloudUtilsService;
 
 /**
  * Created by Erick on 2/17/2018.
@@ -15,74 +13,30 @@ import java.util.ArrayList;
 
 public class TransactionListCloudRepositoryImpl implements TransactionListCloudRepository{
 
-    //private final CloudUtilsImpl mCloudUtils;
+    //private final CloudUtilsService mCloudUtils;
+    private Context mContext;
 
-    public TransactionListCloudRepositoryImpl() {
-//        mCloudUtils = new CloudUtilsImpl(this);
+    public TransactionListCloudRepositoryImpl(Context context) {
+//        mCloudUtils = new CloudUtilsService(this);
+        mContext = context;
     }
 
     @Override
     public void getTransactionsList() {
-        //mCloudUtils.getTransactions();
-        new CloudUtilsImpl().getTransactions();
+        Intent service = new Intent(mContext, CloudUtilsService.class);
+        Bundle args = new Bundle();
+        args.putString(CloudUtils.MODE, CloudUtils.MODE_TRANSACTIONS);
+        service.putExtras(args);
+        mContext.startService(service);
     }
 
     @Override
     public void getRatesList() {
-        //mCloudUtils.getRates();
-        new CloudUtilsImpl().getRates();
+        Intent service = new Intent(mContext, CloudUtilsService.class);
+        Bundle args = new Bundle();
+        args.putString(CloudUtils.MODE, CloudUtils.MODE_RATES);
+        service.putExtras(args);
+        mContext.startService(service);
     }
 }
 
- /*
-    @Override
-    public void onTransactionListSuccess(ArrayList<Transaction> transactions) {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setTransactions(transactions);
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_TRANSACTIONS_SUCCESS);
-        postEvent(mEvent);
-    }
-
-    @Override
-    public void onTransactionListEmpty() {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_TRANSACTIONS_EMPTY);
-        postEvent(mEvent);
-    }
-
-    @Override
-    public void onTransactionListError(String error) {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_TRANSACTIONS_ERROR);
-        mEvent.setError(error);
-        postEvent(mEvent);
-    }
-
-    @Override
-    public void onRateListSuccess(ArrayList<Rate> rates) {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setRates(rates);
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_RATES_SUCCESS);
-        postEvent(mEvent);
-    }
-
-    @Override
-    public void onRateListEmpty() {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_RATES_EMPTY);
-        postEvent(mEvent);
-    }
-
-    @Override
-    public void onRateListError(String error) {
-        TransactionListEvent mEvent = new TransactionListEvent();
-        mEvent.setEventType(TransactionListEvent.EVENT_TYPE_RATES_ERROR);
-        mEvent.setError(error);
-        postEvent(mEvent);
-    }
-
-    private void postEvent(TransactionListEvent event){
-        EventBus mEventBus = EventBusImpl.getInstance();
-        mEventBus.post(event);
-    }
-    */

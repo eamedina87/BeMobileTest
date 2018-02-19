@@ -33,10 +33,12 @@
                 android:value="com.medinamobile.bemobiletest.transaction.list.ui.TransactionListActivity" />
         </activity>
 
+        <service android:name=".utils.CloudUtilsService"/>
+
         <provider
             android:authorities="com.medinamobile.bemobiletest.BeMobileContentProvider"
             android:name=".providers.TestContentProvider"
-            android:exported="true"
+            android:exported="false"
             />
 
         <!-- SCHEMATIC GENERATED PROVIDER - NOT WORKING CORRECTLY

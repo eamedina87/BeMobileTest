@@ -18,4 +18,5 @@ public interface TransactionListInteractor {
     void saveRates(ArrayList<Rate> rates);
 
 
+    void deleteDataFromDatabase();
 }

@@ -41,4 +41,9 @@ public class TransactionListDatabaseRepositoryImpl implements TransactionListDat
     public void getRatesList() {
         mDatabaseUtils.getRates();
     }
+
+    @Override
+    public void deleteAll() {
+        mDatabaseUtils.deleteAll();
+    }
 }

@@ -17,6 +17,8 @@ public class TransactionListEvent extends BeMobileEvent{
     public static final int EVENT_TYPE_RATES_SUCCESS = 4;
     public static final int EVENT_TYPE_RATES_EMPTY = 5;
     public static final int EVENT_TYPE_RATES_ERROR = 6;
+    public static final int EVENT_TYPE_DELETE_SUCCESS = 7;
+    public static final int EVENT_TYPE_DELETE_ERROR = 8;
 
     private ArrayList<Transaction> transactions;
     private ArrayList<Rate> rates;

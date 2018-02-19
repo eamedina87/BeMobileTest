@@ -14,4 +14,6 @@ public interface TransactionListDatabaseRepository {
     void saveRates(ArrayList<Rate> rates);
     void getTransactionsList();
     void getRatesList();
+
+    void deleteAll();
 }

@@ -17,4 +17,5 @@ public interface TransactionListPresenter {
 
     void onEventMainThread(TransactionListEvent event);
 
+    void refreshData();
 }

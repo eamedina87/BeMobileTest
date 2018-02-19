@@ -14,10 +14,10 @@ import retrofit2.http.GET;
 
 public interface RetrofitService {
 
-    @GET(CloudUtilsImpl.URL_RATES)
+    @GET(CloudUtilsService.URL_RATES)
     Call<ArrayList<Rate>> getRatesList();
 
-    @GET(CloudUtilsImpl.URL_TRANSACTIONS)
+    @GET(CloudUtilsService.URL_TRANSACTIONS)
     Call<ArrayList<Transaction>> getTransactionsList();
 
 }

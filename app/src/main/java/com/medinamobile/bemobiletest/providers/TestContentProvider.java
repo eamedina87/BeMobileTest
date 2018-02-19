@@ -200,9 +200,10 @@ public class TestContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-
-
-
+        final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        db.delete(TestContract.TransactionEntry.TABLE_NAME, null, null);
+        db.delete(TestContract.RatesEntry.TABLE_NAME, null, null);
+        getContext().getContentResolver().notifyChange(uri, null);
         return 0;
     }
 
@@ -210,4 +211,6 @@ public class TestContentProvider extends ContentProvider {
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         return 0;
     }
+
+
 }

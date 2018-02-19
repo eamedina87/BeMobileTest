@@ -15,4 +15,6 @@ public interface DatabaseUtils {
     void getRates();
     void saveTransactions(ArrayList<Transaction> transactions);
     void saveRates(ArrayList<Rate> rates);
+
+    void deleteAll();
 }

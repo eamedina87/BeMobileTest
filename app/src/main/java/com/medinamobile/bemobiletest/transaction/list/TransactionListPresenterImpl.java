@@ -45,6 +45,7 @@ public class TransactionListPresenterImpl implements TransactionListPresenter {
 
     @Override
     public void onResume() {
+        mView.showProgress();
         //Get Transactions
         if (PreferenceUtils.areTransactionsUpdated(mContext)){
             mInteractor.getTransactionsFromDatabase();
@@ -53,12 +54,8 @@ public class TransactionListPresenterImpl implements TransactionListPresenter {
         }
         //Get Rates
         if (!PreferenceUtils.areRatesUpdated(mContext)){
-        //    mInteractor.getRatesFromDatabase();
-        //} else {
             mInteractor.getRatesFromCloud();
         }
-        //Show ProgressBar in UI
-        mView.showProgress();
     }
 
     @Override
@@ -78,6 +75,10 @@ public class TransactionListPresenterImpl implements TransactionListPresenter {
                 onRatesSuccess(event.getRates());
                 break;
             }
+            case TransactionListEvent.EVENT_TYPE_DELETE_SUCCESS:{
+                onDeleteSuccess();
+                break;
+            }
             case TransactionListEvent.EVENT_TYPE_TRANSACTIONS_EMPTY:{
                 onTransactionsEmpty();
                 break;
@@ -94,6 +95,33 @@ public class TransactionListPresenterImpl implements TransactionListPresenter {
                 onRatesError(event.getError());
                 break;
             }
+            case TransactionListEvent.EVENT_TYPE_DELETE_ERROR:{
+                onDeleteError();
+                break;
+            }
+        }
+    }
+
+    private void onDeleteSuccess() {
+        if (mView!=null){
+            mView.hideProgress();
+        }
+        PreferenceUtils.setTransactionsUpdated(mContext, false);
+        PreferenceUtils.setRatesUpdated(mContext, false);
+        onResume();
+    }
+
+    private void onDeleteError() {
+        if (mView!=null){
+            mView.hideProgress();
+        }
+    }
+
+    @Override
+    public void refreshData() {
+        mInteractor.deleteDataFromDatabase();
+        if (mView!=null){
+            mView.showProgress();
         }
     }
 
@@ -116,7 +144,6 @@ public class TransactionListPresenterImpl implements TransactionListPresenter {
         if (!PreferenceUtils.areRatesUpdated(mContext)){
             mInteractor.saveRates(rates);
             PreferenceUtils.setRatesUpdated(mContext, true);
-            return;
         }
     }
 
