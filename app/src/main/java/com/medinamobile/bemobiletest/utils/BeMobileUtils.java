@@ -80,6 +80,19 @@ public class BeMobileUtils {
                         return finalFactor.toString();
                     }
                 }
+            } else if (rate.getTo().equals(currency)){
+                for (Rate tmpRate:mRates){
+                    if (tmpRate.getFrom().equals(Rate.CURRENCY_EURO)
+                            && tmpRate.getTo().equals(rate.getTo())){
+                        BigDecimal factor1 = new BigDecimal(rate.getRate());
+                        BigDecimal factor2 = new BigDecimal(tmpRate.getRate());
+                        BigDecimal finalFactor = factor1.divide(factor2);
+                        return finalFactor.toString();
+                    }
+                }
+
+
+
             }
         }
         return null;
